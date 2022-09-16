@@ -1,6 +1,46 @@
+// Whether the game is in progress
+var gameInProgress = false;
+
+// Array of all player guesses
+var guessArr = [];
+
+// Array of all correct colours
+var correctArr = [];
+
+// Level that the player is on
+var level = 1;
+
+// Set level and heading to new level
+function setLevel(newLevel) { level = newLevel; $("#level-title").text("Level " + level.toString()); }
+
+// Red: 0
+// Green: 1
+// Blue: 2
+// Yellow: 3
+
+// Reset everything when game starts
+function startGame() {
+    gameInProgress = true;
+    setLevel(1);
+    guessArr = [];
+    correctArr = [];
+}
+
+// Listening for keypress to start game
+$("html").keypress(function (e) { 
+    // TODO: 
+    // - Empty array
+
+    if (!gameInProgress) { 
+        // Starting game, resetting values
+        startGame(); 
+    }
+});
+
+// Button click event functions
 $("#red").click(function (e) { 
     e.preventDefault();
-    
+
     // Add "pressed" class when button is pressed
     $("#red").addClass("pressed");
 
@@ -45,3 +85,7 @@ $("#yellow").click(function (e) {
         $("#yellow").removeClass("pressed");
     }, 250);
 });
+
+while (gameInProgress) {
+    
+}
