@@ -1,4 +1,4 @@
-jq.$("#red").click(function (e) { 
+$("#red").click(function (e) { 
     e.preventDefault();
     
     // Add "pressed" class when button is pressed
@@ -10,7 +10,7 @@ jq.$("#red").click(function (e) {
     }, 500);
 });
 
-jq.$("#green").click(function (e) { 
+$("#green").click(function (e) { 
     e.preventDefault();
     
     // Add "pressed" class when button is pressed
@@ -22,7 +22,7 @@ jq.$("#green").click(function (e) {
     })
 });
 
-jq.$("#blue").click(function (e) { 
+$("#blue").click(function (e) { 
     e.preventDefault();
     
      // Add "pressed" class when button is pressed
@@ -34,7 +34,7 @@ jq.$("#blue").click(function (e) {
     })
 });
 
-jq.$("#yellow").click(function (e) { 
+$("#yellow").click(function (e) { 
     e.preventDefault();
     
     // Add "pressed" class when button is pressed
