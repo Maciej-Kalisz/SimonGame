@@ -1,6 +1,9 @@
 // Whether the game is in progress
 var gameInProgress = false;
 
+// Whether the game is over
+var gameOver = false;
+
 // Array of all player guesses
 var guessArr = [];
 
@@ -10,13 +13,11 @@ var correctArr = [];
 // Level that the player is on
 var level = 1;
 
-// Set level and heading to new level
-function setLevel(newLevel) { level = newLevel; $("#level-title").text("Level " + level.toString()); }
+// Next colour
+var nextCol;
 
-// Red: 0
-// Green: 1
-// Blue: 2
-// Yellow: 3
+// Set level and heading to new level
+function setLevel(newLevel) { level = newLevel; $("#level-title").text("Level " + newLevel.toString()); }
 
 // Reset everything when game starts
 function startGame() {
@@ -24,6 +25,40 @@ function startGame() {
     setLevel(1);
     guessArr = [];
     correctArr = [];
+    genNext();
+}
+
+// Generate next colour and add to array
+function genNext() {
+    // Generate random number 0-3
+    var randNum = Math.floor(Math.random() * 4)
+
+    // Red: 0
+    // Green: 1
+    // Blue: 2
+    // Yellow: 3
+
+    // Assign colour to each value
+    switch (randNum) {
+        case 0:
+            nextCol = "red";
+            correctArr.push(nextCol);
+        case 1:
+            nextCol = "green";
+            correctArr.push(nextCol);
+        case 2:
+            nextCol = "blue";
+            correctArr.push(nextCol);
+        case 3:
+            nextCol = "yellow";
+            correctArr.push(nextCol);
+    }
+
+    $("#" + nextCol).addClass("pressed");
+    
+    setTimeout(function () {
+        $("#" + nextCol).removeClass("pressed");
+    }, 250);
 }
 
 // Listening for keypress to start game
@@ -48,6 +83,26 @@ $("#red").click(function (e) {
     setTimeout(function () {
         $("#red").removeClass("pressed");
     }, 250);
+
+    // Adds guess to guess array
+    guessArr.push("red");
+
+    // Checks for if guess is correct
+    if (nextCol == "red") {
+        if (guessArr == correctArr) {
+            setLevel(level + 1);
+            genNext();
+        }
+    } else {
+        gameInProgress = false;
+        $("body").addClass("game-over");
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+
+        setTimeout(function () {
+            $("body").removeClass("game-over");
+        }, 400);
+    }
 });
 
 $("#green").click(function (e) { 
@@ -60,6 +115,26 @@ $("#green").click(function (e) {
     setTimeout(function () {
         $("#green").removeClass("pressed");
     }, 250);
+
+    // Adds guess to guess array
+    guessArr.push("green");
+
+    // Checks for if guess is correct
+    if (nextCol == "green") {
+        if (guessArr == correctArr) {
+            setLevel(level + 1);
+            genNext();
+        }
+    } else {
+        gameInProgress = false;
+        $("body").addClass("game-over");
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+
+        setTimeout(function () {
+            $("body").removeClass("game-over");
+        }, 400);
+    }
 });
 
 $("#blue").click(function (e) { 
@@ -72,6 +147,26 @@ $("#blue").click(function (e) {
     setTimeout(function () {
         $("#blue").removeClass("pressed");
     }, 250);
+
+    // Adds guess to guess array
+    guessArr.push("blue");
+
+    // Checks for if guess is correct
+    if (nextCol == "blue") {
+        if (guessArr == correctArr) {
+            setLevel(level + 1);
+            genNext();
+        }
+    } else {
+        gameInProgress = false;
+        $("body").addClass("game-over");
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+
+        setTimeout(function () {
+            $("body").removeClass("game-over");
+        }, 400);
+    }    
 });
 
 $("#yellow").click(function (e) { 
@@ -84,8 +179,24 @@ $("#yellow").click(function (e) {
     setTimeout(function () {
         $("#yellow").removeClass("pressed");
     }, 250);
-});
 
-while (gameInProgress) {
-    
-}
+    // Adds guess to guess array
+    guessArr.push("yellow");
+
+    // Checks for if guess is correct
+    if (nextCol == "yellow") {
+        if (guessArr == correctArr) {
+            setLevel(level + 1);
+            genNext();
+        }
+    } else {
+        gameInProgress = false;
+        $("body").addClass("game-over");
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+
+        setTimeout(function () {
+            $("body").removeClass("game-over");
+        }, 400);
+    }
+});
