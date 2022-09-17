@@ -30,35 +30,37 @@ function startGame() {
 
 // Generate next colour and add to array
 function genNext() {
-    // Generate random number 0-3
-    var randNum = Math.floor(Math.random() * 4)
-
     // Red: 0
     // Green: 1
     // Blue: 2
     // Yellow: 3
 
     // Assign colour to each value
-    switch (randNum) {
+    console.log(Math.floor(Math.random() * 4));
+    switch (Math.floor(Math.random() * 4)) {
         case 0:
             nextCol = "red";
             correctArr.push(nextCol);
+            break;
         case 1:
             nextCol = "green";
             correctArr.push(nextCol);
+            break;
         case 2:
             nextCol = "blue";
             correctArr.push(nextCol);
+            break;
         case 3:
             nextCol = "yellow";
             correctArr.push(nextCol);
     }
 
-    $("#" + nextCol).addClass("pressed");
+    console.log("#" + nextCol);
+    $("#" + nextCol).addClass("nextColour");
     
     setTimeout(function () {
-        $("#" + nextCol).removeClass("pressed");
-    }, 250);
+        $("#" + nextCol).removeClass("nextColour");
+    }, 450);
 }
 
 // Listening for keypress to start game
@@ -89,10 +91,8 @@ $("#red").click(function (e) {
 
     // Checks for if guess is correct
     if (nextCol == "red") {
-        if (guessArr == correctArr) {
-            setLevel(level + 1);
-            genNext();
-        }
+        setLevel(level + 1);
+        genNext();
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -121,10 +121,8 @@ $("#green").click(function (e) {
 
     // Checks for if guess is correct
     if (nextCol == "green") {
-        if (guessArr == correctArr) {
-            setLevel(level + 1);
-            genNext();
-        }
+        setLevel(level + 1);
+        genNext();
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -153,10 +151,8 @@ $("#blue").click(function (e) {
 
     // Checks for if guess is correct
     if (nextCol == "blue") {
-        if (guessArr == correctArr) {
-            setLevel(level + 1);
-            genNext();
-        }
+        setLevel(level + 1);
+        genNext();
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -185,10 +181,8 @@ $("#yellow").click(function (e) {
 
     // Checks for if guess is correct
     if (nextCol == "yellow") {
-        if (guessArr == correctArr) {
-            setLevel(level + 1);
-            genNext();
-        }
+        setLevel(level + 1);
+        genNext();
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -200,3 +194,7 @@ $("#yellow").click(function (e) {
         }, 400);
     }
 });
+
+// TODO:
+// - Add in chain of guesses mechanic
+// Improve stylistic + timing
