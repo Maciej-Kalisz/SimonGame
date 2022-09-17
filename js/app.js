@@ -16,6 +16,9 @@ var level = 1;
 // Next colour
 var nextCol;
 
+// Position in the guessArr (how many buttons player has chosen)
+var guessNum = 0;
+
 // Set level and heading to new level
 function setLevel(newLevel) { level = newLevel; $("#level-title").text("Level " + newLevel.toString()); }
 
@@ -25,6 +28,7 @@ function startGame() {
     setLevel(1);
     guessArr = [];
     correctArr = [];
+    guessNum = 0;
     genNext();
 }
 
@@ -36,7 +40,6 @@ function genNext() {
     // Yellow: 3
 
     // Assign colour to each value
-    console.log(Math.floor(Math.random() * 4));
     switch (Math.floor(Math.random() * 4)) {
         case 0:
             nextCol = "red";
@@ -65,9 +68,6 @@ function genNext() {
 
 // Listening for keypress to start game
 $("html").keypress(function (e) { 
-    // TODO: 
-    // - Empty array
-
     if (!gameInProgress) { 
         // Starting game, resetting values
         startGame(); 
@@ -88,11 +88,23 @@ $("#red").click(function (e) {
 
     // Adds guess to guess array
     guessArr.push("red");
+    guessNum += 1;
 
-    // Checks for if guess is correct
-    if (nextCol == "red") {
-        setLevel(level + 1);
-        genNext();
+    // DEBUG
+    console.log(guessArr[guessNum-1]);
+    console.log(correctArr[guessNum-1])
+
+    // Checks for if guess matches the correct answer in the correct answers array
+    if (guessArr[guessNum-1] == correctArr[guessNum-1]) {
+        // Check to see if player has guessed all correctly by comparing final choice in each array
+        if (guessArr[correctArr.length -1] == correctArr[correctArr.length -1]) {
+            setTimeout(setLevel(level + 1), 650);
+            guessArr = [];
+            guessNum = 0;
+
+            // Generate next after 1.5s
+            setTimeout(genNext, 400);
+        }
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -118,11 +130,23 @@ $("#green").click(function (e) {
 
     // Adds guess to guess array
     guessArr.push("green");
+    guessNum += 1;
 
-    // Checks for if guess is correct
-    if (nextCol == "green") {
-        setLevel(level + 1);
-        genNext();
+    // DEBUG
+    console.log(guessArr[guessNum-1]);
+    console.log(correctArr[guessNum-1])
+
+    // Checks for if guess matches the correct answer in the correct answers array
+    if (guessArr[guessNum-1] == correctArr[guessNum-1]) {
+        // Check to see if player has guessed all correctly by comparing final choice in each array
+        if (guessArr[correctArr.length -1] == correctArr[correctArr.length -1]) {
+            setTimeout(setLevel(level + 1), 650);
+            guessArr = [];
+            guessNum = 0;
+
+            // Generate next after 1.5s
+            setTimeout(genNext, 400);
+        }
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -148,11 +172,23 @@ $("#blue").click(function (e) {
 
     // Adds guess to guess array
     guessArr.push("blue");
+    guessNum += 1;
 
-    // Checks for if guess is correct
-    if (nextCol == "blue") {
-        setLevel(level + 1);
-        genNext();
+    // DEBUG
+    console.log(guessArr[guessNum-1]);
+    console.log(correctArr[guessNum-1])
+
+    // Checks for if guess matches the correct answer in the correct answers array
+    if (guessArr[guessNum-1] == correctArr[guessNum-1]) {
+        // Check to see if player has guessed all correctly by comparing final choice in each array
+        if (guessArr[correctArr.length -1] == correctArr[correctArr.length -1]) {
+            setTimeout(setLevel(level + 1), 650);
+            guessArr = [];
+            guessNum = 0;
+
+            // Generate next after 1.5s
+            setTimeout(genNext, 400);
+        }
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -162,7 +198,7 @@ $("#blue").click(function (e) {
         setTimeout(function () {
             $("body").removeClass("game-over");
         }, 400);
-    }    
+    }
 });
 
 $("#yellow").click(function (e) { 
@@ -178,11 +214,23 @@ $("#yellow").click(function (e) {
 
     // Adds guess to guess array
     guessArr.push("yellow");
+    guessNum += 1;
 
-    // Checks for if guess is correct
-    if (nextCol == "yellow") {
-        setLevel(level + 1);
-        genNext();
+    // DEBUG
+    console.log(guessArr[guessNum-1]);
+    console.log(correctArr[guessNum-1])
+
+    // Checks for if guess matches the correct answer in the correct answers array
+    if (guessArr[guessNum-1] == correctArr[guessNum-1]) {
+        // Check to see if player has guessed all correctly by comparing final choice in each array
+        if (guessArr[correctArr.length -1] == correctArr[correctArr.length -1]) {
+            setTimeout(setLevel(level + 1), 650);
+            guessArr = [];
+            guessNum = 0;
+
+            // Generate next after 1.5s
+            setTimeout(genNext, 400);
+        }
     } else {
         gameInProgress = false;
         $("body").addClass("game-over");
@@ -194,7 +242,3 @@ $("#yellow").click(function (e) {
         }, 400);
     }
 });
-
-// TODO:
-// - Add in chain of guesses mechanic
-// Improve stylistic + timing
